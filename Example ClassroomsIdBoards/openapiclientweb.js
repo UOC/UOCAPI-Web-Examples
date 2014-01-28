@@ -10,8 +10,6 @@ $(function() {
 			var match = hash.match(/access_token=([\w-]+)/);
 			return !!match && match[1];
 	};
-
-	
 	
 	var authorizeHost = setting.host + "/oauth/authorize";
 
@@ -67,7 +65,7 @@ $(function() {
 						row.cells[4].innerHTML = response.classrooms[iter].assignments;
 						row.cells[5].innerHTML = response.classrooms[iter].code;
 						row.cells[6].innerHTML = response.classrooms[iter].shortTitle;	
-						row.cells[7].innerHTML = '<button onclick="getClass('+response.classrooms[iter].id+')">getClassroom'+iter+'</button>';						
+						row.cells[7].innerHTML = '<button onclick="getBoardL('+response.classrooms[iter].id+')">getBoardsfromClass'+iter+'</button>';						
 						iter = iter + 1;
 					}
 				}
@@ -92,17 +90,17 @@ $(function() {
 	
 });
 
-function getClass(cid){
+function getBoardL(cid){
 	$('div.authenticated').hide();
-	$('div.getclass').show();
+	$('div.getBoardL').show();
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
-			/* UOCAPICALL /api/v1/classrooms/{id} GET*/
-			url: apiHost + '/classrooms/'+cid+'?access_token='+$('span.token').text(),
+			/* UOCAPICALL /api/v1/classrooms/{id}/boards GET*/
+			url: apiHost + '/classrooms/'+cid+'/boards?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
-				var table = document.getElementById("taulaClassOne");
+				var table = document.getElementById("taulaBoardL");
 
 				if (response) {
 					var iter = 0;
@@ -112,32 +110,35 @@ function getClass(cid){
 					  firstrow.insertCell();
 					}
 					firstrow.cells[0].innerHTML = "<b>Id</b>";
-					firstrow.cells[1].innerHTML = "<b>Title</b>";
-					firstrow.cells[2].innerHTML = "<b>FatherId</b>";
-					firstrow.cells[3].innerHTML = "<b>Color</b>";
-					firstrow.cells[4].innerHTML = "<b>Assignments</b>";
-					firstrow.cells[5].innerHTML = "<b>Code</b>";
-					firstrow.cells[6].innerHTML = "<b>ShortTitle</b>";
-
+					firstrow.cells[1].innerHTML = "<b>Subtype</b>";
+					firstrow.cells[2].innerHTML = "<b>Title</b>";
+					firstrow.cells[3].innerHTML = "<b>Code</b>";
+					firstrow.cells[4].innerHTML = "<b>DomainId</b>";
+					firstrow.cells[5].innerHTML = "<b>UnreadMessages</b>";
+					firstrow.cells[6].innerHTML = "<b>TotalMessages</b>";
+					iter = 0;
 					var i = 0;
-					var row = table.insertRow(-1);
-					for(i; i < 7; i++) {
-						row.insertCell();
+					while (iter < response.boards.length){
+						var row = table.insertRow(-1);
+						for(i=0; i < 7; i++) {
+							row.insertCell();
+						}
+						row.cells[0].innerHTML = response.boards[iter].id;
+						row.cells[1].innerHTML = response.boards[iter].subtype;
+						row.cells[2].innerHTML = response.boards[iter].title;
+						row.cells[3].innerHTML = response.boards[iter].code;
+						row.cells[4].innerHTML = response.boards[iter].domainId;
+						row.cells[5].innerHTML = response.boards[iter].unreadMessages;
+						row.cells[6].innerHTML = response.boards[iter].totalMessages;
+						iter++;
 					}
-					row.cells[0].innerHTML = response.id;
-					row.cells[1].innerHTML = response.title;
-					row.cells[2].innerHTML = response.fatherId;
-					row.cells[3].innerHTML = response.color;
-					row.cells[4].innerHTML = response.assignments;
-					row.cells[5].innerHTML = response.code;
-					row.cells[6].innerHTML = response.shortTitle;
 				}
 			}
 		});
 }
 /*ENDUOCAPIEXAMPLE*/
 
-function displayUser(){
-	$('div.getclass').hide();
+function displayClassL(){
+	$('div.getBoardL').hide();
 	$('div.authenticated').show();
 }
