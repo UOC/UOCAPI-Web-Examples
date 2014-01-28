@@ -125,7 +125,7 @@ function displayTutors(){
 					iter = 0;
 					var i = 0;
 					while (iter < response.users.length){
-						var row = table.insertRow();
+						var row = table.insertRow(-1);
 						for(i; i < 6; i++) {
 							row.insertCell();
 						}
