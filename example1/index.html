@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>OpenAPI web client demo</title>
+		<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="openapiclientweb.js"></script>
+		<style type="text/css">
+			.hidden {
+				display: none;
+			}
+			.user {
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>OpenAPI web client</h1>
+		<div class="authenticate hidden">
+			<p>
+				OpenAPI web client needs to be authorized to <a href="http://open-api.uoc.edu">Open Api</a>. 
+				Since authorization flow will end up here again, this page must be served from a Web server.
+			</p>
+			<a class="connect" href="">Authorize</a>
+		</div>
+		<div class="authenticated hidden">
+			<p>
+						<a class="iOSlaunch" href=""> Open with the app! </a>
+			</p>
+			<p>
+				Your access token is <span class="token">[no code]</span>.
+			</p>
+			<p>
+			 	   <span class="photoUrl" width="50" height="68">[no image]</span>
+			</p>	
+			<p>
+				This access token identifies the user <span class="user">[no username]</span>.
+			</p>
+			<p>
+				This number identifies the user <span class="number">[no number]</span>.
+			</p>
+			<p>
+				This is user full name <span class="fullName">[no fullname]</span>.
+			</p>	
+			<p>
+				This is user name <span class="name">[no name]</span>.
+			</p>			
+			<p>
+				This is user email <span class="email">[no email]</span>.
+			</p>	
+			<p>		
+			<button onclick="displayProfiles()" > Profiles </button> 
+			<button onclick="displaySettings()" > Settings </button>
+			<button onclick="displayTutors()" > Tutors </button>
+
+			</p>
+		</div>
+		<div class="tutors hidden">
+			<p>
+				Your access token is <span class="token2">[no code]</span>.
+			</p>
+			<table id="taulaTutors" border="1"></table>
+			<p>		
+			<button onclick="displayUser()" > Back </button> 
+			</p>
+		</div>
+	</body>
+</html>
