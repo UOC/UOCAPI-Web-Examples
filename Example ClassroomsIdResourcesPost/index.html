@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
 		<title>OpenAPI web client demo</title>
 		<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="openapiclientweb.js"></script>
@@ -24,20 +24,26 @@
 			<a class="connect" href="">Authorize</a>
 		</div>
 		<div class="authenticated hidden">
-			<h2>/classroom GET</h2>
+			<h2>New Resource</h2>
 			<p>
 				Your access token is <span class="token">[no code]</span>.
 			</p>
-			<table id="taulaClass" border="1"></table>
-
+			<table id="taulaResource" border="1"></table>
+			<button onclick="getClassL()">POST Resource</button>
 			</p>
 		</div>
-		<div class="getclass hidden">
-			<h2>/classroom/{id} GET</h2>
-			<p>
-				Your access token is <span class="token">[no code]</span>.
+		<div class="getClassL hidden">
+			<h2>GET /classroom</h2>
+			<table id="taulaClassL" border="1"></table>
 			</p>
-			<table id="taulaClassOne" border="1"></table>
+		</div>
+		<div class="getResourceL hidden">
+			<h2>POST /classroom/{id}/resources</h2>
+			<p>
+				This are the resources of the classroom with id <span class="cid">[no code]</span>.
+				<span class="errorResourceL"></span>
+			</p>
+			<table id="taulaResourceL" border="1"></table>
 			<button onclick="displayClassL()">Go back</button>
 
 			</p>

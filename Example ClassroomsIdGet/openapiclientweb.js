@@ -97,7 +97,7 @@ function getClass(cid){
 	$('div.getclass').show();
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
-			/* UOCAPICALL /api/v1/classrooms/{id} GET*/
+			/* UOCAPICALL /api/v1/classrooms GET*/
 			url: apiHost + '/classrooms/'+cid+'?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
@@ -137,7 +137,7 @@ function getClass(cid){
 }
 /*ENDUOCAPIEXAMPLE*/
 
-function displayUser(){
+function displayClassL(){
 	$('div.getclass').hide();
 	$('div.authenticated').show();
 }
