@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>OpenAPI web client demo</title>
+		<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="openapiclientweb.js"></script>
+		<style type="text/css">
+			.hidden {
+				display: none;
+			}
+			.user {
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>OpenAPI web client</h1>
+		<div class="authenticate hidden">
+			<p>
+				OpenAPI web client needs to be authorized to <a href="http://open-api.uoc.edu">Open Api</a>. 
+				Since authorization flow will end up here again, this page must be served from a Web server.
+			</p>
+			<a class="connect" href="">Authorize</a>
+		</div>
+		<div class="authenticated hidden">
+			<h2>GET /mail/messages</h2>
+			<p>
+				Your access token is <span class="token">[no code]</span>.
+			</p>
+			<table id="taulaMessages" border="1"></table>
+
+			</p>
+		</div>
+		<div class="getbody hidden">
+			<h2>GET /mail/messages/{id}/body</h2>
+			<p>
+				Your access token is <span class="token">[no code]</span>.
+			</p>
+			<table id="taulaBody" border="1"></table>
+			<button onclick="displayMessages()">Go back</button>
+
+			</p>
+		</div>
+	</body>
+</html>
