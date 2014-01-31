@@ -94,9 +94,7 @@ function getResourceL(cid){
 	$('div.authenticated').hide();
 	$('div.getResourceL').show();
 	$('span.cid').text(cid);
-    /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
-			/* UOCAPICALL /api/v1/classrooms/{id}/resources GET*/
 			url: apiHost + '/classrooms/'+cid+'/resources?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
@@ -137,7 +135,6 @@ function getResourceL(cid){
 			}
 		});
 }
-/*ENDUOCAPIEXAMPLE*/
 
 function getResource(rid){
 	$('div.getResourceL').hide();
@@ -145,7 +142,7 @@ function getResource(rid){
 	$('span.rid').text(rid);
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
-			/* UOCAPICALL /api/v1/classrooms/{id}/resources GET*/
+			/* UOCAPICALL /api/v1/classrooms/{domain_id}/resources/{id} GET*/
 			url: apiHost + '/classrooms/'+$('span.cid').text()+'/resources/'+rid+'?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
