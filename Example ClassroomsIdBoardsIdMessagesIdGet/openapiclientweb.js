@@ -26,8 +26,7 @@ $(function() {
 	};
 
 	var getData = function(token) {
-		$('span.token').text(token);
-		$('div.authenticated').show();
+		
 		
 		$.ajax({
 			url: apiHost + '/classrooms?access_token='+token,
@@ -68,6 +67,8 @@ $(function() {
 						iter = iter + 1;
 					}
 				}
+				$('span.token').text(token);
+				$('div.authenticated').show();
 			}
 		});
 	};
@@ -90,8 +91,6 @@ $(function() {
 });
 
 function getBoardL(cid){
-	$('div.authenticated').hide();
-	$('div.getBoardL').show();
 	$('span.cid').text(cid);
 	$.ajax({
 			url: apiHost + '/classrooms/'+cid+'/boards?access_token='+$('span.token').text(),
@@ -128,92 +127,116 @@ function getBoardL(cid){
 						row.cells[4].innerHTML = response.boards[iter].domainId;
 						row.cells[5].innerHTML = response.boards[iter].unreadMessages;
 						row.cells[6].innerHTML = response.boards[iter].totalMessages;
-						row.cells[7].innerHTML = '<button onclick="getFolderL('+(iter+1)+')">getFoldersfromBoard'+iter+'</button>';
+						row.cells[7].innerHTML = '<button onclick="getMessageL('+(iter+1)+')">getMessagesfromBoard'+iter+'</button>';
 						iter++;
 					}
 				}
+				$('div.authenticated').hide();
+				$('div.getBoardL').show();
 			}
 		});
 }
 
-function getFolderL(index){
-	$('div.getBoardL').hide();
-	$('div.getFolderL').show();
+function getMessageL(index){
 	$('span.bid').text(document.getElementById("taulaBoardL").rows[index].cells[0].innerHTML);
 	$.ajax({
-			url: apiHost + '/classrooms/'+$('span.cid').text()+'/boards/'+$('span.bid').text()+'/folders?access_token='+$('span.token').text(),
+			url: apiHost + '/classrooms/'+$('span.cid').text()+'/boards/'+$('span.bid').text()+'/messages?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
-				var table = document.getElementById("taulaFolderL");
+				var table = document.getElementById("taulaMessageL");
 
 				if (response) {
 					var iter = 0;
 					table.innerHTML = "";
 					var firstrow = table.insertRow();
-					for(iter; iter < 4; iter++) {
+					for(iter; iter < 10; iter++) {
 					  firstrow.insertCell();
 					}
 					firstrow.cells[0].innerHTML = "<b>Id</b>";
-					firstrow.cells[1].innerHTML = "<b>Name</b>";
-					firstrow.cells[2].innerHTML = "<b>UnreadMessages</b>";
-					firstrow.cells[3].innerHTML = "<b>TotalMessages</b>";
+					firstrow.cells[1].innerHTML = "<b>Subject</b>";
+					firstrow.cells[2].innerHTML = "<b>Snippet</b>";
+					firstrow.cells[3].innerHTML = "<b>Date</b>";
+					firstrow.cells[4].innerHTML = "<b>Color</b>";
+					firstrow.cells[5].innerHTML = "<b>Status</b>";
+					firstrow.cells[6].innerHTML = "<b>From</b>";
+					firstrow.cells[7].innerHTML = "<b>To</b>";
+					firstrow.cells[8].innerHTML = "<b>Cc</b>";
+					firstrow.cells[9].innerHTML = "<b>Body</b>";
 					iter = 0;
 					var i = 0;
-					while (iter < response.folders.length){
+					while (iter < response.messages.length){
 						var row = table.insertRow(-1);
-						for(i=0; i < 5; i++) {
+						for(i=0; i < 11; i++) {
 							row.insertCell();
 						}
-						row.cells[0].innerHTML = response.folders[iter].id;
-						row.cells[1].innerHTML = response.folders[iter].name;
-						row.cells[2].innerHTML = response.folders[iter].unreadMessages;
-						row.cells[3].innerHTML = response.folders[iter].totalMessages;
-						row.cells[4].innerHTML = '<button onclick="getFolder('+(iter+1)+')">getFolder'+iter+'</button>';
+						row.cells[0].innerHTML = response.messages[iter].id;
+						row.cells[1].innerHTML = response.messages[iter].subject;
+						row.cells[2].innerHTML = response.messages[iter].snippet;
+						row.cells[3].innerHTML = response.messages[iter].date;
+						row.cells[4].innerHTML = response.messages[iter].color;
+						row.cells[5].innerHTML = response.messages[iter].status;
+						row.cells[6].innerHTML = response.messages[iter].from;
+						row.cells[7].innerHTML = response.messages[iter].to;
+						row.cells[8].innerHTML = response.messages[iter].cc;
+						row.cells[9].innerHTML = response.messages[iter].body;
+						row.cells[10].innerHTML = '<button onclick="getMessage('+(iter+1)+')">getMessage'+iter+'</button>';
 						iter = iter + 1;
 					}
 				}
+				$('div.getBoardL').hide();
+				$('div.getMessageL').show();
 			}
 		});
 }
 
-function getFolder(index){
-	$('div.getFolderL').hide();
-	$('div.getFolder').show();
-	$('span.fid').text(document.getElementById("taulaFolderL").rows[index].cells[0].innerHTML);
+function getMessage(index){
+	$('span.mid').text(document.getElementById("taulaMessageL").rows[index].cells[0].innerHTML);
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
-			/* UOCAPICALL /api/v1/classrooms/{domain_id}/boards/{board_id}/folders/{id} GET*/
-			url: apiHost + '/classrooms/'+$('span.cid').text()+'/boards/'+$('span.bid').text()+'/folders/'+$('span.fid').text()+'?access_token='+$('span.token').text(),
+			/* UOCAPICALL /api/v1/classrooms/{domain_id}/boards/{board_id}/messages/{id} GET*/
+			url: apiHost + '/classrooms/'+$('span.cid').text()+'/boards/'+$('span.bid').text()+'/messages/'+$('span.mid').text()+'?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
-				var table = document.getElementById("taulaFolder");
+				var table = document.getElementById("taulaMessage");
 
 				if (response) {
 					var iter = 0;
 					table.innerHTML = "";
 					var firstrow = table.insertRow();
-					for(iter; iter < 4; iter++) {
+					for(iter; iter < 10; iter++) {
 					  firstrow.insertCell();
 					}
 					firstrow.cells[0].innerHTML = "<b>Id</b>";
-					firstrow.cells[1].innerHTML = "<b>Name</b>";
-					firstrow.cells[2].innerHTML = "<b>UnreadMessages</b>";
-					firstrow.cells[3].innerHTML = "<b>TotalMessages</b>";
+					firstrow.cells[1].innerHTML = "<b>Subject</b>";
+					firstrow.cells[2].innerHTML = "<b>Snippet</b>";
+					firstrow.cells[3].innerHTML = "<b>Date</b>";
+					firstrow.cells[4].innerHTML = "<b>Color</b>";
+					firstrow.cells[5].innerHTML = "<b>Status</b>";
+					firstrow.cells[6].innerHTML = "<b>From</b>";
+					firstrow.cells[7].innerHTML = "<b>To</b>";
+					firstrow.cells[8].innerHTML = "<b>Cc</b>";
+					firstrow.cells[9].innerHTML = "<b>Body</b>";
 					iter = 0;
 					var i = 0;
 					var row = table.insertRow(-1);
-					for(i=0; i < 4; i++) {
+					for(i=0; i < 10; i++) {
 						row.insertCell();
 					}
 					row.cells[0].innerHTML = response.id;
-					row.cells[1].innerHTML = response.name;
-					row.cells[2].innerHTML = response.unreadMessages;
-					row.cells[3].innerHTML = response.totalMessages;
+					row.cells[1].innerHTML = response.subject;
+					row.cells[2].innerHTML = response.snippet;
+					row.cells[3].innerHTML = response.date;
+					row.cells[4].innerHTML = response.color;
+					row.cells[5].innerHTML = response.status;
+					row.cells[6].innerHTML = response.from;
+					row.cells[7].innerHTML = response.to;
+					row.cells[8].innerHTML = response.cc;
+					row.cells[9].innerHTML = response.body;
 				}
-				$('div.getBoardL').hide();
-				$('div.getFolder').show();
+				$('div.getMessageL').hide();
+				$('div.getMessage').show();
 			}
 		});
 }
@@ -225,11 +248,11 @@ function displayClassL(){
 }
 
 function displayBoardL(){
-	$('div.getFolderL').hide();
+	$('div.getMessageL').hide();
 	$('div.getBoardL').show();
 }
 
-function displayFolderL(){
-	$('div.getFolder').hide();
-	$('div.getFolderL').show();
+function displayMessageL(){
+	$('div.getMessage').hide();
+	$('div.getMessageL').show();
 }

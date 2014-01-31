@@ -54,10 +54,9 @@ $(function() {
 					var i = 0;
 					while (iter < response.classrooms.length){
 						var row = table.insertRow(-1);
-						for(i; i < 8; i++) {
+						for(i=0; i < 8; i++) {
 							row.insertCell();
 						}
-						i = 0;
 						row.cells[0].innerHTML = response.classrooms[iter].id;
 						row.cells[1].innerHTML = response.classrooms[iter].title;
 						row.cells[2].innerHTML = response.classrooms[iter].fatherId;
@@ -122,10 +121,9 @@ function getPeopleL(cid){
 					var i = 0;
 					while (iter < response.users.length){
 						var row = table.insertRow(-1);
-						for(i; i < 9; i++) {
+						for(i=0; i < 9; i++) {
 							row.insertCell();
 						}
-						i = 0;
 						row.cells[0].innerHTML = '<img src="' + response.users[iter].photoUrl + '">';
 						row.cells[1].innerHTML = response.users[iter].id;
 						row.cells[2].innerHTML = response.users[iter].username;

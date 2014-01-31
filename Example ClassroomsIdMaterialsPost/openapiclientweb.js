@@ -96,10 +96,9 @@ function getClassL(){
 				var i = 0;
 				while (iter < response.classrooms.length){
 					var row = table.insertRow(-1);
-					for(i; i < 8; i++) {
+					for(i=0; i < 8; i++) {
 						row.insertCell();
 					}
-					i = 0;
 					row.cells[0].innerHTML = response.classrooms[iter].id;
 					row.cells[1].innerHTML = response.classrooms[iter].title;
 					row.cells[2].innerHTML = response.classrooms[iter].fatherId;
@@ -158,10 +157,9 @@ function postMaterial(cid){
 						var i = 0;
 						while (iter < response.materials.length){
 							var row = table.insertRow(-1);
-							for(i; i < 4; i++) {
+							for(i=0; i < 4; i++) {
 								row.insertCell();
 							}
-							i = 0;
 							row.cells[0].innerHTML = response.materials[iter].id;
 							row.cells[1].innerHTML = response.materials[iter].type;
 							row.cells[2].innerHTML = response.materials[iter].title;
