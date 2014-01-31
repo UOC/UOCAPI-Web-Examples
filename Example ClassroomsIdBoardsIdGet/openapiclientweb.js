@@ -129,7 +129,7 @@ function getBoardL(cid){
 						row.cells[4].innerHTML = response.boards[iter].domainId;
 						row.cells[5].innerHTML = response.boards[iter].unreadMessages;
 						row.cells[6].innerHTML = response.boards[iter].totalMessages;
-						row.cells[7].innerHTML = '<button onclick="getBoard('+response.boards[iter].id+')">getBoardsfromClass'+iter+'</button>';
+						row.cells[7].innerHTML = '<button onclick="getBoard('+(iter+1)+')">getBoardsfromClass'+iter+'</button>';
 						iter++;
 					}
 				}
@@ -137,14 +137,14 @@ function getBoardL(cid){
 		});
 }
 
-function getBoard(bid){
+function getBoard(index){
 	$('div.getBoardL').hide();
 	$('div.getBoard').show();
-	$('span.bid').text(bid);
+	$('span.bid').text(document.getElementById("taulaBoardL").rows[index].cells[0].innerHTML);
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
 			/* UOCAPICALL /api/v1/classrooms/{domain_id}/boards/{id} GET*/
-			url: apiHost + '/classrooms/'+$('span.cid').text()+'/boards/'+bid+'?access_token='+$('span.token').text(),
+			url: apiHost + '/classrooms/'+$('span.cid').text()+'/boards/'+$('span.bid').text()+'?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
 			success: function(response) {

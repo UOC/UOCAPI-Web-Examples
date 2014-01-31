@@ -128,7 +128,7 @@ function getResourceL(cid){
 						row.cells[3].innerHTML = response.resources[iter].title;
 						row.cells[4].innerHTML = response.resources[iter].code;
 						row.cells[5].innerHTML = response.resources[iter].domainId;
-						row.cells[6].innerHTML = '<button onclick="getResource('+response.resources[iter].id+')">getResource'+iter+'</button>';
+						row.cells[6].innerHTML = '<button onclick="getResource('+(iter+1)+')">getResource'+iter+'</button>';
 						iter = iter + 1;
 					}
 				}
@@ -136,14 +136,14 @@ function getResourceL(cid){
 		});
 }
 
-function getResource(rid){
+function getResource(index){
 	$('div.getResourceL').hide();
 	$('div.getResource').show();
-	$('span.rid').text(rid);
+	$('span.rid').text(document.getElementById("taulaResourceL").rows[index].cells[0].innerHTML);
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
 			/* UOCAPICALL /api/v1/classrooms/{domain_id}/resources/{id} GET*/
-			url: apiHost + '/classrooms/'+$('span.cid').text()+'/resources/'+rid+'?access_token='+$('span.token').text(),
+			url: apiHost + '/classrooms/'+$('span.cid').text()+'/resources/'+$('span.rid').text()+'?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
 			success: function(response) {

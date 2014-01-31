@@ -132,14 +132,14 @@ function getMaterialL(cid){
 		});
 }
 
-function getMaterial(bid){
+function getMaterial(mid){
 	$('div.getMaterialL').hide();
 	$('div.getMaterial').show();
-	$('span.bid').text(bid);
+	$('span.mid').text(mid);
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
 			/* UOCAPICALL /api/v1/classrooms/{domain_id}/materials/{id} GET*/
-			url: apiHost + '/classrooms/'+$('span.token').text()+'/materials/'+bid+'?access_token='+$('span.token').text(),
+			url: apiHost + '/classrooms/'+$('span.token').text()+'/materials/'+mid+'?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
