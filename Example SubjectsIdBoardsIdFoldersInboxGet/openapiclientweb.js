@@ -142,7 +142,7 @@ function getFolderL(index){
 	$('span.bid').text(document.getElementById("taulaBoardL").rows[index].cells[0].innerHTML);
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
-			/* UOCAPICALL /api/v1/subjects/{domain_id}/boards/{id}/folders/inbox GET*/
+			/* UOCAPICALL /api/v1/subjects/{domain_id}/boards/{board_id}/folders/inbox GET*/
 			url: apiHost + '/subjects/'+$('span.cid').text()+'/boards/'+$('span.bid').text()+'/folders/inbox?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
