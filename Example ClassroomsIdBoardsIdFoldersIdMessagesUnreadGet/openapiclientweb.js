@@ -181,7 +181,7 @@ function getMessageL(index){
 	$('span.fid').text(document.getElementById("taulaFolderL").rows[index].cells[0].innerHTML);
     /*STARTUOCAPIEXAMPLE*/	
 	$.ajax({
-			/* UOCAPICALL /api/v1/classrooms/{domain_id}/boards/{board_id}/folders/{folder_id}/messages/unread GET*/
+			/* UOCAPICALL /api/v1/classrooms/{domain_id}/boards/{board_id}/folders/{id}/messages/unread GET*/
 			url: apiHost + '/classrooms/'+$('span.cid').text()+'/boards/'+$('span.bid').text()+'/folders/'+$('span.fid').text()+'/messages/unread?access_token='+$('span.token').text(),
 			type: "GET",
 			dataType: "json",
